@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -33,23 +33,15 @@ jobs:
         cache: 'npm'
     - name: Install dependencies 📦
       # ci is faster than normal install
-      run: |
-        cd react-test-practise
-        npm ci
+      run: npm ci
     - name: Build the app 🏗
-      run: |
-        cd react-test-practise
-        npm run build --if-present
+      run: npm run build --if-present
     - name: Run component tests 🔸
-      run: |
-        cd react-test-practise
-        npm run test
+      run: npm run test
     - name: Start the app 📤
       run: |
-        cd react-test-practise
         npm start &
         npx wait-on --timeout 60000
     - name: Run visual tests 👁
       run: |
-        cd react-test-practise
         npm run test:visual
